@@ -1,8 +1,9 @@
 # ci-oracle-client-runner
 A container that contains an oracle client for running against Concourse.
 The files here are based on the OracleInstantClient docker images provided by Oracle, that can be found here: https://github.com/oracle/docker-images/tree/master/OracleInstantClient
+This is based on the Oracle Linux 7-slim (dist-amd64) container image: https://github.com/oracle/container-images/tree/573754fe56e7e8d570c554e8152fc9606c89561d/7-slim
 
-# About this Docker Image
+## About this Docker Image
 
 These Docker images contain the Oracle Instant Client 'Basic', 'SDK' and 'SQL\*Plus' packages.  They can be used to build and run Oracle Call Interface (OCI), Oracle C++ Call Interface (OCCI), and JDBC-OCI applications applications.  The SQL\*Plus command-line query tool allows quick ad-hoc SQL and PL/SQL execution.  The Docker images can be extended with optional packages for ODBC, or to include tools such as Oracle SQL\*Loader.
 
