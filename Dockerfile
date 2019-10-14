@@ -1,6 +1,4 @@
 # ci-oracle-client-runner - Dockerfile for Oracle Instant Client
-# Based on Oracle template: https://github.com/oracle/docker-images/blob/master/OracleInstantClient/dockerfiles/19/Dockerfile
-# Oracle client component packages documented here: https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html
 
 FROM oraclelinux:7-slim
 
