@@ -14,7 +14,7 @@ RUN  yum -y install oracle-release-el7 && yum-config-manager --enable ol7_oracle
 ENV PATH=$PATH:/usr/lib/oracle/${release}.${update}/client64/bin
 
 # Additional packages used in scripts:
-RUN  yum install -y hostname-3.13-3.el7.x86_64 && \
+RUN  yum install -y hostname-3.13 && \
      rm -rf /var/cache/yum
 
 CMD ["sqlplus", "-v"]
