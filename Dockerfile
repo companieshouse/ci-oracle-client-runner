@@ -1,6 +1,7 @@
 FROM oraclelinux:8
 
-RUN yum install -y \
+RUN yum update -y && \
+    yum install -y \
     epel-release \
     zip \
     unzip \
