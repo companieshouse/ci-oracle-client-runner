@@ -13,27 +13,23 @@ The scripts have been developed and tested using:
 
 - [Docker](https://www.docker.com/) (18.03.1)
 
-## AWS Configuration
-AWS credentials are supplied via the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` and `AWS_SESSION_TOKEN` as build arguments.
+## Build context
 
+The image build does not download anything from S3. Concourse fetches the required packages from S3 and copies them into a `packages/` directory in the build context before the image is built.
 
-Variable               | Description                                                     | Notes                      
----------------------- | --------------------------------------------------------------- | --------------------------
-AWS_ACCESS_KEY_ID | A valid Access Key ID to authenticate your AWS requests                        | Can be exported in your local shell or set in your bash profile
-AWS_SECRET_ACCESS_KEY    | A valid Secret Access Key to authenticate your AWS requests  | Can be exported in your local shell or set in your bash profile
-AWS_SECRET_ACCESS_KEY    | A valid Session Token to authenticate your AWS requests  | Can be exported in your local shell or set in your bash profile 
+The following files must be present in `packages/`:
+
+- `jdk-8u152-linux-x64.rpm`
+- `apache-ant-1.9.13-bin.zip`
+- `ivy-2.3.0.jar`
+- `sonarqube-ant-task-2.7.0.1612.jar`
 
 ## Building the image
 
-These credentials will not be stored on the image and is purely for pulling in the required resources for the build image.
-
+To build locally, copy the files above into a `packages/` directory at the root of this repository, then run:
 
 ```sh
-docker build \
---build-arg AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id) \
---build-arg AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key) \
---build-arg AWS_SESSION_TOKEN=$(aws configure get aws_session_token) \
--t ci-oracle-client-runner .
+docker build -t ci-oracle-client-runner .
 ```
 
 ## Running the image
