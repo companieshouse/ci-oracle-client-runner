@@ -26,11 +26,30 @@ The following files must be present in `packages/`:
 
 ## Building the image
 
-To build locally, copy the files above into a `packages/` directory at the root of this repository, then run:
+To build locally, download the packages from S3 into a `packages/` directory at the root of this repository. You need AWS credentials with read access to the development resources bucket, for example:
+
+```sh
+aws sso login --profile development-eu-west-2
+export AWS_PROFILE=development-eu-west-2
+```
+
+Then download the packages:
+
+```sh
+mkdir -p packages
+aws s3 cp s3://development-eu-west-2.resources.ch.gov.uk/jdk-8u152-linux-x64.rpm packages/
+aws s3 cp s3://development-eu-west-2.resources.ch.gov.uk/apache-ant-1.9.13-bin.zip packages/
+aws s3 cp s3://development-eu-west-2.resources.ch.gov.uk/ivy-2.3.0.jar packages/
+aws s3 cp s3://development-eu-west-2.resources.ch.gov.uk/packages/sonar/sonarqube-ant-task-2.7.0.1612.jar packages/
+```
+
+Build the image:
 
 ```sh
 docker build -t ci-oracle-client-runner .
 ```
+
+The `packages/` directory is in `.gitignore`. Do not commit the downloaded files.
 
 ## Running the image
 

@@ -1,1 +1,5 @@
+# Packages downloaded from S3 for local builds
 packages/
+*.rpm
+*.zip
+*.jar
