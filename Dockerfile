@@ -14,23 +14,17 @@ COPY resources/requirements.txt /requirements.txt
 RUN python3 -m pip install --no-cache-dir -r /requirements.txt
 
 ARG ANT_VERSION="1.9.13"
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
-ARG AWS_SESSION_TOKEN
-
-RUN aws s3 cp s3://resources.ch.gov.uk/jdk-8u152-linux-x64.rpm /tmp/ && \
-    aws s3 cp s3://resources.ch.gov.uk/apache-ant-${ANT_VERSION}-bin.zip /tmp/ && \
-    unzip /tmp/apache-ant-${ANT_VERSION}-bin.zip -d /usr/share/ && \
-    ln -s /usr/share/apache-ant-${ANT_VERSION}/bin/ant /usr/bin/ant
-
-RUN aws s3 cp s3://resources.ch.gov.uk/ivy-2.3.0.jar /usr/share/apache-ant-${ANT_VERSION}/lib && \
-    aws s3 cp s3://resources.ch.gov.uk/packages/sonar/sonarqube-ant-task-2.7.0.1612.jar /usr/share/apache-ant-${ANT_VERSION}/lib
 
 ENV JAVA_HOME=/usr/java/default
-RUN yum install -y /tmp/jdk-8u152-linux-x64.rpm && \
-    unzip /tmp/apache-ant-${ANT_VERSION}-bin.zip && \
-    rm /tmp/jdk-8u152-linux-x64.rpm && \
-    rm /tmp/apache-ant-${ANT_VERSION}-bin.zip && \
+
+COPY packages/ /tmp/packages/
+RUN yum install -y /tmp/packages/jdk-8u152-linux-x64.rpm && \
+    unzip /tmp/packages/apache-ant-${ANT_VERSION}-bin.zip -d /usr/share/ && \
+    ln -s /usr/share/apache-ant-${ANT_VERSION}/bin/ant /usr/bin/ant && \
+    cp /tmp/packages/ivy-2.3.0.jar \
+       /tmp/packages/sonarqube-ant-task-2.7.0.1612.jar \
+       /usr/share/apache-ant-${ANT_VERSION}/lib/ && \
+    rm -rf /tmp/packages && \
     yum clean all
 
 RUN  yum -y install oracle-instantclient-release-el7 && \
