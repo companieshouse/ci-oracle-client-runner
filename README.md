@@ -37,10 +37,10 @@ Then download the packages:
 
 ```sh
 mkdir -p packages
-aws s3 cp s3://development-eu-west-2.resources.ch.gov.uk/jdk-8u152-linux-x64.rpm packages/
-aws s3 cp s3://development-eu-west-2.resources.ch.gov.uk/apache-ant-1.9.13-bin.zip packages/
-aws s3 cp s3://development-eu-west-2.resources.ch.gov.uk/ivy-2.3.0.jar packages/
-aws s3 cp s3://development-eu-west-2.resources.ch.gov.uk/packages/sonar/sonarqube-ant-task-2.7.0.1612.jar packages/
+aws s3 cp s3://resources.ch.gov.uk/jdk-8u152-linux-x64.rpm packages/
+aws s3 cp s3://resources.ch.gov.uk/apache-ant-1.9.13-bin.zip packages/
+aws s3 cp s3://resources.ch.gov.uk/ivy-2.3.0.jar packages/
+aws s3 cp s3://resources.ch.gov.uk/packages/sonar/sonarqube-ant-task-2.7.0.1612.jar packages/
 ```
 
 Build the image:
